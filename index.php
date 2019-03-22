@@ -35,7 +35,7 @@
 		global $rootitr;
 		echo '<div id="postcustomstuff">';
 		foreach ($rootitr as $key => &$val) {
-			echo '<input name="'.$key.'" style="border-color: #DFDFDF;padding: 7px;width: 100%;" placeholder="'.$val.'" value="'.wp_specialchars( get_post_meta( $object->ID, $key, true ), 1 ).'" />';
+			echo '<input name="'.$key.'" style="border-color: #DFDFDF;padding: 7px;width: 100%;" placeholder="'.$val.'" value="'.esc_html( get_post_meta( $object->ID, $key, true ), 1 ).'" />';
 		}
 		echo '<input type="hidden" name="my_meta_box_nonce" value="'.wp_create_nonce( plugin_basename( __FILE__ ) ).'" />';
 		echo '</div>';
@@ -51,7 +51,7 @@
 		global $rootitr;
 		foreach ($rootitr as $key => &$val) {
 			$key_a = get_post_meta( $post_id, $key, true );
-			$key_b = wp_specialchars( $_POST[$key] );
+			$key_b = esc_html( $_POST[$key] );
 			if ( $key_b && $key_a == '' ) {
 				add_post_meta( $post_id, $key, $key_b, true );
 			}elseif ( $key_b != $key_a ) {
